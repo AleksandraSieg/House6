@@ -21,22 +21,18 @@ public class HouseApplication implements CommandLineRunner{
 
     }
 
+    public Room createRoom(String owner, int amountOfWindows){
+        return Room.builder().owner(owner).amountOfWindows(amountOfWindows).build();
+    }
+
     public void run(String... strings) throws Exception {
-        Room room1 = new Room();
-        room1.setOwner("Stach");
-        room1.setAmountOfWindows(4);
+        Room room1 = Room.builder().owner("Stach").amountOfWindows(4).build();
+        Room room2 = Room.builder().owner("Maria").amountOfWindows(6).build();
+        Room room3 = Room.builder().owner("Ingrida").amountOfWindows(7).build();
+        Room room4 = Room.builder().owner("Marian").amountOfWindows(1).build();
         roomRepository.save(room1);
-        Room room2 = new Room();
-        room2.setOwner("Maria");
-        room2.setAmountOfWindows(6);
         roomRepository.save(room2);
-        Room room3 = new Room();
-        room3.setOwner("Ingrida");
-        room3.setAmountOfWindows(7);
         roomRepository.save(room3);
-        Room room4 = new Room();
-        room4.setOwner("Marian");
-        room4.setAmountOfWindows(1);
         roomRepository.save(room4);
     }
 

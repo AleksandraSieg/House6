@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.madison.dao.RoomDao;
 import pl.madison.domain.Room;
 
+import java.util.List;
+
 @RestController
 public class TestControll {
 
@@ -15,13 +17,8 @@ public class TestControll {
     RoomDao roomDao;
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show() {
-        String room = "";
-        for (Room room1 : roomDao.findAll()) {
-            room = room + room1;
-        }
-
-        return room;
+    public List<Room> show() {
+        return (List<Room>)roomDao.findAll();
     }
 
     @RequestMapping(value = "/showOwnerWhoHasTheLeastAmountOfWindows", method = RequestMethod.GET)
@@ -35,8 +32,7 @@ public class TestControll {
             }
         }
 
-        return temporaryOwner + "właściciel, który ma najmniej okien to: " + tempRoom.getOwner()
-                + " ilość okien: " + tempRoom.getAmountOfWindows();
+        return tempRoom.getOwner();
 
 
     }
@@ -58,7 +54,7 @@ public class TestControll {
         return "You have successfully deleted room from database";
     }
 
-    @RequestMapping(value = "/findRooom", method = RequestMethod.GET)
+    @RequestMapping(value = "/findRoom", method = RequestMethod.GET)
     public String findRoom(@RequestParam("id") Long id) {
 
         Room tempRoom = roomDao.findOne(id);
@@ -67,9 +63,7 @@ public class TestControll {
 
     @RequestMapping(value = "/addRoom", method = RequestMethod.PUT)
     public String addRoom(@RequestParam("owner") String owner, @RequestParam("amountOfWindows") int amountOfWindows){
-        Room tempRoom = new Room();
-        tempRoom.setOwner(owner);
-        tempRoom.setAmountOfWindows(amountOfWindows);
+        Room tempRoom = Room.builder().owner(owner).amountOfWindows(amountOfWindows).build();
         roomDao.save(tempRoom);
         return "You have successfully added new room";
     }
