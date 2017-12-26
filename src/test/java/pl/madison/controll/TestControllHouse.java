@@ -17,15 +17,14 @@ import pl.madison.domain.Room;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestControllTest {
+public class TestControllHouse {
     @InjectMocks
-    private TestControll testControll;
+    private HouseControll houseControll;
 
     @Mock
     private RoomDao roomDao;
@@ -34,7 +33,7 @@ public class TestControllTest {
 
     @Before
     public void init(){
-        mockMvc = MockMvcBuilders.standaloneSetup(testControll).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(houseControll).build();
     }
 
     @Test

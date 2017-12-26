@@ -11,7 +11,7 @@ import pl.madison.domain.Room;
 import java.util.List;
 
 @RestController
-public class TestControll {
+public class HouseControll {
 
     @Autowired
     RoomDao roomDao;
